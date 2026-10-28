@@ -119,7 +119,9 @@ PALETTE = {
     "truck": (150, 90, 255),
 }
 
-base = os.path.dirname(os.path.abspath(__file__))
+# Input files (raw road photo + pre-trained model weights) live in a local
+# working folder; set CEP_INPUT to point at it when re-running this pipeline.
+base = os.environ.get("CEP_INPUT", os.path.dirname(os.path.abspath(__file__)))
 img = cv2.imread(os.path.join(base, "road_original.jpg"))
 H, W = img.shape[:2]
 
