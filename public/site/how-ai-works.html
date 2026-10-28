@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How AI Works | AI Traffic Analysis</title>
+  <meta name="description" content="A 4-step explainer of how AI detects vehicles and calculates traffic density, with a real bounding-box demo frame." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="page-how">
+  <header class="site-nav glass">
+    <a class="brand" href="index.html">
+      <span class="brand-mark" aria-hidden="true">🚦</span>
+      <span>AI Traffic <strong>Analysis</strong></span>
+    </a>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="how-ai-works.html" class="active">How AI Works</a>
+      <a href="insights.html">Traffic Insights</a>
+      <a href="demo.html">AI Demo</a>
+      <a href="safety.html">Road Safety</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page-head glass">
+      <p class="eyebrow">Explainer</p>
+      <h1>How AI counts traffic</h1>
+      <p class="lead">
+        Object-detection models like YOLO look at a road frame the same way a traffic
+        constable does — spot every vehicle, note its position, keep counting. Here is the
+        full pipeline in four steps.
+      </p>
+    </section>
+
+    <section class="glass card diagram-card">
+      <img src="assets/workflow.png" alt="Four-step workflow: input, detect, count, density score" loading="lazy" />
+      <div class="tag-row">
+        <span class="tag simulated">Simulated Data</span>
+      </div>
+      <p class="caption">Illustrative 4-step workflow diagram, rendered with Python (Matplotlib).</p>
+    </section>
+
+    <section class="grid-2">
+      <article class="glass card">
+        <span class="step-num">1</span>
+        <h2>Input — video or photo</h2>
+        <p>
+          The pipeline starts with road footage or a photo — in our case a short clip and a
+          still frame captured at our local junction. No live stream, no server needed.
+        </p>
+      </article>
+      <article class="glass card">
+        <span class="step-num">2</span>
+        <h2>Detect — YOLO / OpenCV</h2>
+        <p>
+          A pre-trained object-detection model scans the frame and draws a bounding box
+          around every vehicle it recognises — cars, buses, motorcycles and more.
+        </p>
+      </article>
+      <article class="glass card">
+        <span class="step-num">3</span>
+        <h2>Count — vehicles</h2>
+        <p>
+          Each box is one vehicle. The script counts the boxes per frame or per minute,
+          giving an objective vehicle count without anyone standing by the road.
+        </p>
+      </article>
+      <article class="glass card">
+        <span class="step-num">4</span>
+        <h2>Density — congestion score</h2>
+        <p>
+          The count is compared against a threshold. Below it the road flows smoothly;
+          above it the junction is congested. That simple score powers our demo slider.
+        </p>
+      </article>
+    </section>
+
+    <section class="glass card compare-card">
+      <h2>See it happen</h2>
+      <p>
+        Below is the <strong>original road frame</strong> beside the <strong>same frame after our Python
+        script ran object detection</strong> on it — 8 vehicles detected with confidence scores.
+      </p>
+      <div class="compare">
+        <figure>
+          <img src="assets/road_original.jpg" alt="Original road photograph at a junction" loading="lazy" />
+          <figcaption>Original road frame</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/yolo_frame.jpg" alt="Same road frame with AI bounding boxes drawn around detected vehicles" loading="lazy" />
+          <figcaption>After AI detection — boxes + confidence</figcaption>
+        </figure>
+      </div>
+      <div class="tag-row">
+        <span class="tag ai">AI Model Output</span>
+      </div>
+      <p class="caption">
+        Bounding boxes produced by running a pre-trained detection model with OpenCV on a
+        sample road frame — not a live feed.
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>AI Traffic Analysis — Sem 5 CEP · Your College Name, University of Mumbai</p>
+    <p class="muted">Static HTML/CSS/JS website · Charts &amp; detection frames generated offline with Python</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

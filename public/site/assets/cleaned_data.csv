@@ -1,0 +1,9 @@
+Hour,Vehicles,Peak
+8 AM,120,False
+9 AM,450,False
+10 AM,580,True
+11 AM,310,False
+12 PM,280,False
+5 PM,520,True
+6 PM,680,True
+7 PM,410,False
