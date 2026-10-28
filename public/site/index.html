@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Traffic Analysis | CEP Home</title>
+  <meta name="description" content="A Sem 5 Community Engagement Project translating AI traffic monitoring into road safety awareness for the local community." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="page-home">
+  <header class="site-nav glass">
+    <a class="brand" href="index.html">
+      <span class="brand-mark" aria-hidden="true">🚦</span>
+      <span>AI Traffic <strong>Analysis</strong></span>
+    </a>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
+    <nav class="nav-links">
+      <a href="index.html" class="active">Home</a>
+      <a href="how-ai-works.html">How AI Works</a>
+      <a href="insights.html">Traffic Insights</a>
+      <a href="demo.html">AI Demo</a>
+      <a href="safety.html">Road Safety</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero glass">
+      <p class="eyebrow">Mumbai University · Sem 5 · Community Engagement Project</p>
+      <h1>Seeing traffic the way <span class="highlight">AI sees it</span></h1>
+      <p class="lead">
+        We used computer vision, Python and a small field survey to turn everyday road
+        congestion at our local junction into simple charts, honest data and practical
+        safety tips for our community.
+      </p>
+      <div class="hero-actions">
+        <a class="btn primary" href="demo.html">Try the AI Demo</a>
+        <a class="btn ghost" href="insights.html">View Traffic Insights</a>
+      </div>
+      <div class="tag-row" aria-label="Data provenance legend">
+        <span class="tag collected">Collected Data</span>
+        <span class="tag ai">AI Model Output</span>
+        <span class="tag simulated">Simulated Data</span>
+      </div>
+    </section>
+
+    <section class="split">
+      <article class="glass card">
+        <h2>The problem</h2>
+        <p>
+          Peak-hour congestion at our neighbourhood junction grows every year, yet most
+          commuters have no idea <em>when</em> the road is safest to use. Traffic data usually
+          lives inside government systems — not in the hands of the people who cross that
+          junction every day.
+        </p>
+      </article>
+      <article class="glass card">
+        <h2>Our mission</h2>
+        <p>
+          Build a lightweight, mobile-first website that explains how AI counts vehicles,
+          shares what we actually measured on the ground, and turns it into clear safety
+          guidance — with every number honestly labelled by its source.
+        </p>
+      </article>
+    </section>
+
+    <section>
+      <h2 class="section-title">What you'll find here</h2>
+      <div class="grid-3">
+        <a class="glass card link-card" href="how-ai-works.html">
+          <span class="card-emoji" aria-hidden="true">🤖</span>
+          <h3>How AI Works</h3>
+          <p>A 4-step explainer of vehicle detection, with a real bounding-box frame.</p>
+        </a>
+        <a class="glass card link-card" href="insights.html">
+          <span class="card-emoji" aria-hidden="true">📊</span>
+          <h3>Traffic Insights</h3>
+          <p>Python-generated charts of our field counts and community survey.</p>
+        </a>
+        <a class="glass card link-card" href="demo.html">
+          <span class="card-emoji" aria-hidden="true">🎛️</span>
+          <h3>Interactive AI Demo</h3>
+          <p>Move a slider and watch the congestion status change instantly.</p>
+        </a>
+        <a class="glass card link-card" href="safety.html">
+          <span class="card-emoji" aria-hidden="true">🛡️</span>
+          <h3>Road Safety</h3>
+          <p>Bite-sized tips for pedestrians and two-wheelers, in English, Hindi &amp; Marathi.</p>
+        </a>
+      </div>
+    </section>
+
+    <section class="glass card credits-card">
+      <h2>About this project</h2>
+      <!-- EDIT: Replace the placeholder names below with your real CEP details. -->
+      <dl class="credits">
+        <div><dt>College</dt><dd>Your College Name, University of Mumbai</dd></div>
+        <div><dt>Subject</dt><td>Semester 5 — Community Engagement Project (CEP)</td></div>
+        <div><dt>Team</dt><dd>Student Name 1 (Roll No. __) · Student Name 2 (Roll No. __) · Student Name 3 (Roll No. __)</dd></div>
+        <div><dt>Guide</dt><dd>Prof. Guide Name</dd></div>
+        <div><dt>Built with</dt><dd>HTML, CSS &amp; JavaScript frontend · Python (Pandas, Matplotlib, OpenCV) data pipeline</dd></div>
+      </dl>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <!-- EDIT: Repeat your CEP credits here once finalised. -->
+    <p>AI Traffic Analysis — Sem 5 CEP · Your College Name, University of Mumbai</p>
+    <p class="muted">Static HTML/CSS/JS website · Charts &amp; detection frames generated offline with Python</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

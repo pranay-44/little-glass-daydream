@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interactive AI Demo | AI Traffic Analysis</title>
+  <meta name="description" content="Drag the slider to change the vehicle count and watch the congestion status change in real time — a client-side simulation." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="page-demo">
+  <header class="site-nav glass">
+    <a class="brand" href="index.html">
+      <span class="brand-mark" aria-hidden="true">🚦</span>
+      <span>AI Traffic <strong>Analysis</strong></span>
+    </a>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="how-ai-works.html">How AI Works</a>
+      <a href="insights.html">Traffic Insights</a>
+      <a href="demo.html" class="active">AI Demo</a>
+      <a href="safety.html">Road Safety</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page-head glass">
+      <p class="eyebrow">Interactive</p>
+      <h1>Try the congestion demo</h1>
+      <p class="lead">
+        Imagine our detector has counted the vehicles at the junction this hour. Drag the
+        slider to change that count and watch the congestion status update instantly —
+        exactly how the density score in our pipeline works.
+      </p>
+    </section>
+
+    <section class="glass card demo-card">
+      <div class="tag-row">
+        <span class="tag simulated">Simulated Data</span>
+      </div>
+      <div class="demo-status" id="demoStatus" role="status">
+        <span class="status-dot" id="statusDot"></span>
+        <div>
+          <span class="status-label" id="statusLabel">Smooth Flow</span>
+          <span class="status-detail" id="statusDetail">Road is moving freely. Safe window to travel.</span>
+        </div>
+      </div>
+
+      <div class="count-readout">
+        <span id="vehicleCount">0</span>
+        <small>vehicles / hour</small>
+      </div>
+
+      <label class="slider-label" for="trafficSlider">Vehicle count</label>
+      <input type="range" id="trafficSlider" min="0" max="800" step="10" value="0" aria-describedby="statusLabel" />
+
+      <div class="scale-row">
+        <span>0</span>
+        <span>200</span>
+        <span>400</span>
+        <span>600</span>
+        <span>800</span>
+      </div>
+
+      <div class="meter" aria-hidden="true">
+        <div class="meter-fill" id="meterFill"></div>
+        <span class="meter-tick t1"></span>
+        <span class="meter-tick t2"></span>
+      </div>
+
+      <p class="caption">
+        This widget runs fully in your browser (Vanilla JavaScript). Thresholds: under 250
+        vehicles = smooth, 250–500 = moderate, above 500 = heavy congestion.
+      </p>
+    </section>
+
+    <section class="grid-2">
+      <article class="glass card">
+        <h2>🟢 Smooth flow — under 250</h2>
+        <p>The junction has spare capacity. A good window for new riders and pedestrians to travel or cross.</p>
+      </article>
+      <article class="glass card">
+        <h2>🟡 Moderate — 250 to 500</h2>
+        <p>Traffic is building. Expect queueing at signals and allow extra time before crossing.</p>
+      </article>
+      <article class="glass card">
+        <h2>🔴 Heavy congestion — above 500</h2>
+        <p>Matches our real 5–6 PM field readings. Avoid non-essential trips through the junction at this hour.</p>
+      </article>
+      <article class="glass card">
+        <h2>Why thresholds matter</h2>
+        <p>This is the same logic an AI traffic system uses: detection gives a count, and a threshold turns the count into an actionable alert.</p>
+      </article>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>AI Traffic Analysis — Sem 5 CEP · Your College Name, University of Mumbai</p>
+    <p class="muted">Static HTML/CSS/JS website · Charts &amp; detection frames generated offline with Python</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

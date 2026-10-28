@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Traffic Insights | AI Traffic Analysis</title>
+  <meta name="description" content="Field-count and community-survey findings for our local junction, visualised with Python-generated charts." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="page-insights">
+  <header class="site-nav glass">
+    <a class="brand" href="index.html">
+      <span class="brand-mark" aria-hidden="true">🚦</span>
+      <span>AI Traffic <strong>Analysis</strong></span>
+    </a>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="how-ai-works.html">How AI Works</a>
+      <a href="insights.html" class="active">Traffic Insights</a>
+      <a href="demo.html">AI Demo</a>
+      <a href="safety.html">Road Safety</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page-head glass">
+      <p class="eyebrow">Findings</p>
+      <h1>Traffic insights &amp; findings</h1>
+      <p class="lead">
+        What we actually measured: a 15-minute manual vehicle count at our junction and a
+        mini Google Form survey among college peers and neighbours. Every chart below is
+        generated offline by our Python script (Pandas + Matplotlib) and tagged with its source.
+      </p>
+    </section>
+
+    <section class="stat-row">
+      <div class="glass stat">
+        <span class="stat-value">680</span>
+        <span class="stat-label">vehicles in the busiest interval (6 PM)</span>
+      </div>
+      <div class="glass stat">
+        <span class="stat-value">2</span>
+        <span class="stat-label">peak windows — morning 10 AM &amp; evening 6 PM</span>
+      </div>
+      <div class="glass stat">
+        <span class="stat-value">55%</span>
+        <span class="stat-label">of surveyed commuters rarely feel safe crossing</span>
+      </div>
+    </section>
+
+    <section class="glass card chart-card">
+      <h2>Peak hour vehicle count</h2>
+      <img src="assets/peak_hours.png" alt="Bar chart of vehicle counts by hour, peaking at 6 PM with 680 vehicles" loading="lazy" />
+      <div class="tag-row">
+        <span class="tag collected">Collected Data</span>
+      </div>
+      <p class="caption">
+        Manual 15-minute field count at our local junction. Red bars mark peak intervals
+        (above 500 vehicles). Generated with the Python script in <code>pipeline.py</code>.
+      </p>
+    </section>
+
+    <section class="glass card chart-card">
+      <h2>Community safety survey</h2>
+      <img class="pie" src="assets/survey_pie.png" alt="Pie chart: 55 percent rarely feel safe, 30 percent sometimes, 15 percent always" loading="lazy" />
+      <div class="tag-row">
+        <span class="tag collected">Collected Data</span>
+      </div>
+      <p class="caption">
+        “How safe do you feel crossing your main junction during peak hours?” — mini Google
+        Form shared with college peers and neighbours (20 responses).
+      </p>
+    </section>
+
+    <section class="glass card">
+      <h2>What this means</h2>
+      <p>
+        Evening hours are the worst window to cross or ride through the junction — the 6 PM
+        count is more than five times the 8 AM count. Combined with the survey result, the
+        clear takeaway is that <strong>pedestrian infrastructure and safer crossing habits need
+        attention exactly when traffic peaks</strong>. That conclusion drives the safety tips on
+        the next page.
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>AI Traffic Analysis — Sem 5 CEP · Your College Name, University of Mumbai</p>
+    <p class="muted">Static HTML/CSS/JS website · Charts &amp; detection frames generated offline with Python</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
