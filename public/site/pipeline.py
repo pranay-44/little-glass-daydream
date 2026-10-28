@@ -78,7 +78,7 @@ steps = [
     ("4. Density\nScore", "Count is compared to a\nthreshold = congestion level"),
 ]
 fig, ax = plt.subplots(figsize=(10, 2.9), dpi=200)
-ax.set_xlim(0, 10)
+ax.set_xlim(0, 10.35)
 ax.set_ylim(0, 3)
 ax.axis("off")
 box_w, box_h = 2.0, 2.0
