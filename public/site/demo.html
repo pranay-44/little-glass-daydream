@@ -4,11 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Interactive AI Demo | AI Traffic Analysis</title>
-  <meta name="description" content="Drag the slider to change the vehicle count and watch the congestion status change in real time — a client-side simulation." />
+  <meta name="description" content="Upload a traffic image and watch our AI simulation detect vehicles, count them, and generate a congestion analysis — all running in your browser." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="demo-ai.css" />
 </head>
 <body class="page-demo">
   <header class="site-nav glass">
@@ -27,13 +28,138 @@
   </header>
 
   <main>
+    <!-- ===== Page header ===== -->
     <section class="page-head glass">
-      <p class="eyebrow">Interactive</p>
-      <h1>Try the congestion demo</h1>
+      <p class="eyebrow">Interactive AI Demo</p>
+      <h1>Upload & analyse traffic</h1>
       <p class="lead">
-        Imagine our detector has counted the vehicles at the junction this hour. Drag the
-        slider to change that count and watch the congestion status update instantly —
-        exactly how the density score in our pipeline works.
+        Drop a traffic photo below — our client-side AI simulation will scan the image,
+        detect vehicles, and produce a full congestion analysis dashboard in seconds.
+      </p>
+    </section>
+
+    <!-- ===== Upload zone ===== -->
+    <section class="ai-upload-section glass card" id="uploadSection">
+      <div class="upload-zone" id="uploadZone" role="button" tabindex="0" aria-label="Upload a traffic image">
+        <div class="upload-zone-inner">
+          <div class="upload-icon-ring">
+            <svg class="upload-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="17 8 12 3 7 8"/>
+              <line x1="12" y1="3" x2="12" y2="15"/>
+            </svg>
+          </div>
+          <p class="upload-title">Drop a traffic image here</p>
+          <p class="upload-sub">or <span class="upload-link">click to browse</span> · JPG, PNG up to 10 MB</p>
+        </div>
+        <input type="file" id="fileInput" accept="image/*" class="sr-only" />
+      </div>
+    </section>
+
+    <!-- ===== Analysis area (hidden until image uploaded) ===== -->
+    <div id="analysisArea" class="analysis-area hidden">
+      <!-- Image canvas + bounding boxes -->
+      <section class="glass card analysis-image-card">
+        <div class="analysis-header">
+          <div class="analysis-status" id="analysisStatus">
+            <span class="pulse-dot"></span>
+            <span id="statusText">Initialising AI engine…</span>
+          </div>
+          <button class="btn-reset" id="resetBtn" title="Upload a new image">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="1 4 1 10 7 10"/>
+              <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/>
+            </svg>
+            New image
+          </button>
+        </div>
+        <div class="canvas-wrapper" id="canvasWrapper">
+          <canvas id="aiCanvas"></canvas>
+          <div class="scan-line" id="scanLine"></div>
+          <div class="bbox-overlay" id="bboxOverlay"></div>
+        </div>
+        <div class="tag-row" style="margin-top: 12px;">
+          <span class="tag simulated">Simulated Detection</span>
+          <span class="tag ai">Client-Side AI Demo</span>
+        </div>
+      </section>
+
+      <!-- Dashboard -->
+      <section class="ai-dashboard" id="dashboard">
+        <!-- Vehicle count cards -->
+        <div class="dash-row" id="vehicleCounts">
+          <div class="dash-stat glass card">
+            <span class="dash-stat-icon">🚗</span>
+            <span class="dash-stat-value" id="countCar">—</span>
+            <span class="dash-stat-label">Cars</span>
+          </div>
+          <div class="dash-stat glass card">
+            <span class="dash-stat-icon">🚌</span>
+            <span class="dash-stat-value" id="countBus">—</span>
+            <span class="dash-stat-label">Buses</span>
+          </div>
+          <div class="dash-stat glass card">
+            <span class="dash-stat-icon">🏍️</span>
+            <span class="dash-stat-value" id="countBike">—</span>
+            <span class="dash-stat-label">Two-wheelers</span>
+          </div>
+          <div class="dash-stat glass card">
+            <span class="dash-stat-icon">🚛</span>
+            <span class="dash-stat-value" id="countTruck">—</span>
+            <span class="dash-stat-label">Trucks</span>
+          </div>
+          <div class="dash-stat glass card total">
+            <span class="dash-stat-icon">📊</span>
+            <span class="dash-stat-value" id="countTotal">—</span>
+            <span class="dash-stat-label">Total Detected</span>
+          </div>
+        </div>
+
+        <!-- Congestion gauge -->
+        <div class="glass card congestion-card" id="congestionCard">
+          <h2>Congestion Analysis</h2>
+          <div class="congestion-gauge">
+            <div class="gauge-track">
+              <div class="gauge-fill" id="gaugeFill"></div>
+            </div>
+            <div class="gauge-labels">
+              <span>Low</span>
+              <span>Moderate</span>
+              <span>Heavy</span>
+            </div>
+          </div>
+          <div class="congestion-result" id="congestionResult">
+            <span class="congestion-dot" id="congDot"></span>
+            <div>
+              <strong id="congLevel">—</strong>
+              <p id="congDesc">Analysis pending…</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Detection log -->
+        <div class="glass card detection-log-card">
+          <h2>Detection Log</h2>
+          <div class="detection-log" id="detectionLog">
+            <p class="log-placeholder">Detections will appear here…</p>
+          </div>
+        </div>
+
+        <!-- Safety recommendation -->
+        <div class="glass card safety-card" id="safetyCard">
+          <h2>🛡️ Safety Recommendation</h2>
+          <p id="safetyText">Upload an image to receive a safety recommendation based on detected congestion levels.</p>
+        </div>
+      </section>
+    </div>
+
+    <!-- ===== Original slider demo ===== -->
+    <section class="page-head glass" style="margin-top: 12px;">
+      <p class="eyebrow">Manual Simulation</p>
+      <h1>Congestion slider</h1>
+      <p class="lead">
+        Don't have a traffic image? Use the slider below to manually simulate vehicle counts
+        and see the congestion status change in real time.
       </p>
     </section>
 
@@ -97,7 +223,7 @@
     </section>
   </main>
 
-
   <script src="script.js"></script>
+  <script src="demo-ai.js"></script>
 </body>
 </html>
