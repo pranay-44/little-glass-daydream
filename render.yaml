@@ -1,0 +1,13 @@
+# Render Blueprint: deploys the static website in public/site (no build step needed).
+services:
+  - type: web
+    runtime: static
+    name: ai-traffic-analysis
+    staticPublishPath: ./public/site
+    headers:
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /assets/*
+        name: Cache-Control
+        value: public, max-age=86400
